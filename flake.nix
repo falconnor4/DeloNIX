@@ -26,6 +26,16 @@
     };
     
     nix-alien.url = "github:thiagokokada/nix-alien";
+
+    nixos-generators = {
+      url = "github:nix-community/nixos-generators";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    lsfg-vk-flake = {
+      url = "github:pabloaul/lsfg-vk-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = { self, nixpkgs, home-manager, ... }@inputs: {
