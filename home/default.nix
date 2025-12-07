@@ -112,7 +112,6 @@
         "$mod, R, exec, wofi --show drun"
         "$mod, P, pseudo," # dwindle
         "$mod, J, togglesplit," # dwindle
-        "$mod, L, exec, hyprlock" # Lock screen
         "$mod, F, fullscreen,"
 
         # Scratchpad
@@ -125,11 +124,8 @@
         "$mod, up, movefocus, u"
         "$mod, down, movefocus, d"
         
-        # Move focus with mod + vim keys
-        "$mod, h, movefocus, l"
-        "$mod, l, movefocus, r"
-        "$mod, k, movefocus, u"
-        "$mod, j, movefocus, d"
+        # Lock screen (moved here to avoid conflict)
+        "$mod SHIFT, L, exec, hyprlock"
         
         # Switch workspaces with mod + [0-9]
         "$mod, 1, workspace, 1"
