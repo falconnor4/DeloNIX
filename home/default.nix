@@ -34,6 +34,33 @@
 
     # Gaming
     inputs.lsfg-vk-flake.packages.${pkgs.system}.default
+    
+    # Additional GUI applications for ricing
+    kitty # Terminal emulator (better than default)
+    dolphin # File manager
+    wofi # Application launcher
+    grim # Screenshot tool
+    slurp # Screen selection tool
+    wl-clipboard # Wayland clipboard utilities
+    pavucontrol # PulseAudio volume control
+    brightnessctl # Brightness control
+    networkmanagerapplet # Network manager applet
+    
+    # Additional CLI tools
+    neofetch # System info
+    cmatrix # Matrix effect in terminal
+    lolcat # Colorful output
+    figlet # ASCII art text
+    
+    # Media and productivity
+    mpv # Video player
+    imv # Image viewer
+    discord # Communication
+    spotify # Music
+    
+    # Development extras
+    gh # GitHub CLI
+    lazygit # TUI for git
   ];
 
   # Hyprland User Config
@@ -42,6 +69,40 @@
     settings = {
       # Basic Hyprland configuration
       "$mod" = "SUPER";
+      
+      # General settings for animations and behavior
+      general = {
+        gaps_in = 5;
+        gaps_out = 10;
+        border_size = 2;
+        layout = "dwindle";
+      };
+      
+      decoration = {
+        rounding = 10;
+        blur = {
+          enabled = true;
+          size = 3;
+          passes = 1;
+        };
+        drop_shadow = true;
+        shadow_range = 4;
+        shadow_render_power = 3;
+      };
+      
+      animations = {
+        enabled = true;
+        bezier = "myBezier, 0.05, 0.9, 0.1, 1.05";
+        animation = [
+          "windows, 1, 7, myBezier"
+          "windowsOut, 1, 7, default, popin 80%"
+          "border, 1, 10, default"
+          "borderangle, 1, 8, default"
+          "fade, 1, 7, default"
+          "workspaces, 1, 6, default"
+        ];
+      };
+      
       bind = [
         "$mod, Q, exec, kitty"
         "$mod, C, killactive,"
@@ -52,16 +113,65 @@
         "$mod, P, pseudo," # dwindle
         "$mod, J, togglesplit," # dwindle
         "$mod, L, exec, hyprlock" # Lock screen
+        "$mod, F, fullscreen,"
 
         # Scratchpad
         "$mod, S, togglespecialworkspace, magic"
         "$mod SHIFT, S, movetoworkspace, special:magic"
+        
+        # Move focus with mod + arrow keys
+        "$mod, left, movefocus, l"
+        "$mod, right, movefocus, r"
+        "$mod, up, movefocus, u"
+        "$mod, down, movefocus, d"
+        
+        # Move focus with mod + vim keys
+        "$mod, h, movefocus, l"
+        "$mod, l, movefocus, r"
+        "$mod, k, movefocus, u"
+        "$mod, j, movefocus, d"
+        
+        # Switch workspaces with mod + [0-9]
+        "$mod, 1, workspace, 1"
+        "$mod, 2, workspace, 2"
+        "$mod, 3, workspace, 3"
+        "$mod, 4, workspace, 4"
+        "$mod, 5, workspace, 5"
+        "$mod, 6, workspace, 6"
+        "$mod, 7, workspace, 7"
+        "$mod, 8, workspace, 8"
+        "$mod, 9, workspace, 9"
+        "$mod, 0, workspace, 10"
+        
+        # Move active window to a workspace with mod + SHIFT + [0-9]
+        "$mod SHIFT, 1, movetoworkspace, 1"
+        "$mod SHIFT, 2, movetoworkspace, 2"
+        "$mod SHIFT, 3, movetoworkspace, 3"
+        "$mod SHIFT, 4, movetoworkspace, 4"
+        "$mod SHIFT, 5, movetoworkspace, 5"
+        "$mod SHIFT, 6, movetoworkspace, 6"
+        "$mod SHIFT, 7, movetoworkspace, 7"
+        "$mod SHIFT, 8, movetoworkspace, 8"
+        "$mod SHIFT, 9, movetoworkspace, 9"
+        "$mod SHIFT, 0, movetoworkspace, 10"
+        
+        # Screenshot bindings
+        ", Print, exec, grim -g \"$(slurp)\" - | wl-copy"
+        "$mod, Print, exec, grim - | wl-copy"
+        "SHIFT, Print, exec, grim -g \"$(slurp)\" ~/Pictures/screenshot-$(date +%Y%m%d-%H%M%S).png"
+      ];
+      
+      # Mouse bindings
+      bindm = [
+        "$mod, mouse:272, movewindow"
+        "$mod, mouse:273, resizewindow"
       ];
       
       exec-once = [
         "waybar"
         "dunst"
         "hypridle"
+        "nm-applet --indicator"
       ];
     };
   };
@@ -73,12 +183,158 @@
       mainBar = {
         layer = "top";
         position = "top";
-        height = 30;
-        modules-left = [ "hyprland/workspaces" ];
+        height = 35;
+        spacing = 8;
+        modules-left = [ "hyprland/workspaces" "hyprland/window" ];
         modules-center = [ "clock" ];
-        modules-right = [ "cpu" "memory" "battery" "tray" ];
+        modules-right = [ "pulseaudio" "network" "cpu" "memory" "temperature" "battery" "tray" ];
+        
+        "hyprland/workspaces" = {
+          format = "{icon}";
+          on-click = "activate";
+          format-icons = {
+            "1" = "一";
+            "2" = "二";
+            "3" = "三";
+            "4" = "四";
+            "5" = "五";
+            "urgent" = "";
+            "active" = "";
+            "default" = "";
+          };
+          sort-by-number = true;
+        };
+        
+        "hyprland/window" = {
+          format = "{}";
+          max-length = 50;
+          separate-outputs = true;
+        };
+        
+        clock = {
+          format = " {:%H:%M   %d/%m/%Y}";
+          tooltip-format = "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>";
+        };
+        
+        cpu = {
+          format = " {usage}%";
+          tooltip = false;
+          interval = 2;
+        };
+        
+        memory = {
+          format = " {}%";
+          interval = 2;
+        };
+        
+        temperature = {
+          critical-threshold = 80;
+          format = "{icon} {temperatureC}°C";
+          format-icons = [ "" "" "" ];
+        };
+        
+        battery = {
+          states = {
+            warning = 30;
+            critical = 15;
+          };
+          format = "{icon} {capacity}%";
+          format-charging = " {capacity}%";
+          format-plugged = " {capacity}%";
+          format-icons = [ "" "" "" "" "" ];
+        };
+        
+        network = {
+          format-wifi = " {signalStrength}%";
+          format-ethernet = " Connected";
+          format-disconnected = "⚠ Disconnected";
+          tooltip-format = "{ifname}: {ipaddr}/{cidr}";
+        };
+        
+        pulseaudio = {
+          format = "{icon} {volume}%";
+          format-muted = " Muted";
+          format-icons = {
+            headphone = "";
+            hands-free = "";
+            headset = "";
+            phone = "";
+            portable = "";
+            car = "";
+            default = [ "" "" "" ];
+          };
+          on-click = "pavucontrol";
+        };
+        
+        tray = {
+          spacing = 10;
+        };
       };
     };
+    style = ''
+      * {
+        font-family: JetBrainsMono Nerd Font;
+        font-size: 13px;
+        min-height: 0;
+      }
+      
+      window#waybar {
+        background: transparent;
+      }
+      
+      #workspaces button {
+        padding: 0 8px;
+        background: transparent;
+        color: @text;
+        border-radius: 8px;
+        margin: 4px;
+      }
+      
+      #workspaces button.active {
+        background: @surface0;
+        color: @lavender;
+      }
+      
+      #workspaces button.urgent {
+        background: @red;
+        color: @crust;
+      }
+      
+      #clock,
+      #battery,
+      #cpu,
+      #memory,
+      #temperature,
+      #network,
+      #pulseaudio,
+      #tray,
+      #window {
+        padding: 4px 12px;
+        margin: 4px 2px;
+        background: @surface0;
+        border-radius: 8px;
+      }
+      
+      #battery.charging {
+        background: @green;
+        color: @crust;
+      }
+      
+      #battery.warning:not(.charging) {
+        background: @yellow;
+        color: @crust;
+      }
+      
+      #battery.critical:not(.charging) {
+        background: @red;
+        color: @crust;
+      }
+      
+      #temperature.critical {
+        background: @red;
+        color: @crust;
+      }
+    '';
   };
 
   services.dunst.enable = true;
@@ -211,6 +467,21 @@
           };
         };
       };
+    };
+  };
+
+  # Kitty terminal configuration
+  programs.kitty = {
+    enable = true;
+    font = {
+      name = "JetBrainsMono Nerd Font";
+      size = 11;
+    };
+    settings = {
+      background_opacity = "0.95";
+      confirm_os_window_close = 0;
+      enable_audio_bell = false;
+      window_padding_width = 10;
     };
   };
 

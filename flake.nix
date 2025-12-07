@@ -36,6 +36,11 @@
       url = "github:pabloaul/lsfg-vk-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    comma = {
+      url = "github:nix-community/comma";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = { self, nixpkgs, home-manager, ... }@inputs: {

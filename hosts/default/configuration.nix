@@ -78,11 +78,20 @@
     # shodan # Check if shodan is in nixpkgs, otherwise might need python package
     (python3.withPackages(ps: with ps; [ shodan ]))
     nixos-generators
-  ];
-
-  # Nix-Alien
-  environment.systemPackages = with pkgs; [
     inputs.nix-alien.packages.${pkgs.system}.nix-alien
+    inputs.comma.packages.${pkgs.system}.comma
+    
+    # Additional useful system packages
+    btop # Better top for system monitoring
+    eza # Modern ls replacement
+    bat # Better cat with syntax highlighting
+    ripgrep # Fast grep replacement
+    fd # Better find
+    fzf # Fuzzy finder
+    zoxide # Smart cd replacement
+    duf # Better df
+    ncdu # Disk usage analyzer
+    htop # Classic system monitor
   ];
 
   # Stylix
