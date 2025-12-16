@@ -1,4 +1,4 @@
-{ config, pkgs, inputs, ... }:
+{ config, pkgs, inputs, lib, ... }:
 
 {
   # Packages
@@ -62,6 +62,8 @@
     # lazygit # TUI for git - Moved to programs.lazygit module below
     inputs.zen-browser.packages.${pkgs.system}.default
     inputs.antigravity.packages.${pkgs.system}.default
+    
+    # Google Drive Helpers
 
     # Google Drive Helpers
     kdePackages.kio-gdrive # Native Dolphin Support
@@ -304,7 +306,7 @@
     };
     style = ''
       * {
-        font-family: JetBrainsMono Nerd Font;
+        font-family: ${config.stylix.fonts.monospace.name};
         font-size: 13px;
         min-height: 0;
       }
@@ -316,19 +318,19 @@
       #workspaces button {
         padding: 0 8px;
         background: transparent;
-        color: @text;
+        color: #${config.lib.stylix.colors.base05};
         border-radius: 8px;
         margin: 4px;
       }
       
       #workspaces button.active {
-        background: @surface0;
-        color: @lavender;
+        background: #${config.lib.stylix.colors.base02};
+        color: #${config.lib.stylix.colors.base0D};
       }
       
       #workspaces button.urgent {
-        background: @red;
-        color: @crust;
+        background: #${config.lib.stylix.colors.base08};
+        color: #${config.lib.stylix.colors.base00};
       }
       
       #clock,
@@ -342,33 +344,33 @@
       #window {
         padding: 4px 12px;
         margin: 4px 2px;
-        background: @surface0;
+        background: #${config.lib.stylix.colors.base02};
         border-radius: 8px;
       }
       
       #battery.charging {
-        background: @green;
-        color: @crust;
+        background: #${config.lib.stylix.colors.base0B};
+        color: #${config.lib.stylix.colors.base00};
       }
       
       #battery.warning:not(.charging) {
-        background: @yellow;
-        color: @crust;
+        background: #${config.lib.stylix.colors.base0A};
+        color: #${config.lib.stylix.colors.base00};
       }
       
       #battery.critical:not(.charging) {
-        background: @red;
-        color: @crust;
+        background: #${config.lib.stylix.colors.base08};
+        color: #${config.lib.stylix.colors.base00};
       }
       
       #temperature.critical {
-        background: @red;
-        color: @crust;
+        background: #${config.lib.stylix.colors.base08};
+        color: #${config.lib.stylix.colors.base00};
       }
       
       #custom-power {
-        background: @red;
-        color: @crust;
+        background: #${config.lib.stylix.colors.base08};
+        color: #${config.lib.stylix.colors.base00};
         padding: 4px 12px;
         margin: 4px 2px;
         border-radius: 8px;
@@ -387,23 +389,23 @@
         grace = 0;
         disable_loading_bar = true;
       };
-      background = [
+      background = lib.mkForce [
         {
           path = "screenshot";
           blur_passes = 3;
           blur_size = 8;
         }
       ];
-      input-field = [
+      input-field = lib.mkForce [
         {
           size = "200, 50";
           position = "0, -80";
           monitor = "";
           dots_center = true;
           fade_on_empty = false;
-          font_color = "rgb(202, 211, 245)";
-          inner_color = "rgb(24, 24, 37)";
-          outer_color = "rgb(24, 24, 37)";
+          font_color = "#${config.lib.stylix.colors.base05}";
+          inner_color = "#${config.lib.stylix.colors.base00}";
+          outer_color = "#${config.lib.stylix.colors.base0D}";
           outline_thickness = 5;
           placeholder_text = "Password...";
           shadow_passes = 2;
@@ -513,12 +515,9 @@
   # Kitty terminal configuration
   programs.kitty = {
     enable = true;
-    font = {
-      name = "JetBrainsMono Nerd Font";
-      size = 11;
-    };
+
     settings = {
-      background_opacity = "0.95";
+
       confirm_os_window_close = 0;
       enable_audio_bell = false;
       window_padding_width = 10;

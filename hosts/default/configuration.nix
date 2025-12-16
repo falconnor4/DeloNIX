@@ -126,9 +126,43 @@
   ];
 
   # Stylix
-  stylix.image = ../../Delonix.jpg;
-  stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
+  stylix.enable = true;
+  stylix.autoEnable = true;
+  stylix.targets.gtk.enable = true;
+  stylix.targets.gnome.enable = true;
+
+
+  stylix.image = ../../wallpaper.png;
+  # stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml"; # Commented out for dynamic colors from image
   stylix.polarity = "dark";
+  
+  stylix.fonts = {
+    monospace = {
+      package = pkgs.nerd-fonts.jetbrains-mono;
+      name = "JetBrainsMono Nerd Font";
+    };
+    sansSerif = {
+      package = pkgs.dejavu_fonts;
+      name = "DejaVu Sans";
+    };
+    serif = {
+      package = pkgs.dejavu_fonts;
+      name = "DejaVu Serif";
+    };
+  };
+
+  stylix.opacity = {
+    terminal = 0.95;
+    applications = 1.0;
+    desktop = 1.0;
+    popups = 1.0;
+  };
+
+  stylix.cursor = {
+    package = pkgs.bibata-cursors;
+    name = "Bibata-Modern-Ice";
+    size = 24;
+  };
 
   system.stateVersion = "23.11"; 
 }
