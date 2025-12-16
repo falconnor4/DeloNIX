@@ -62,6 +62,25 @@
     # lazygit # TUI for git - Moved to programs.lazygit module below
     inputs.zen-browser.packages.${pkgs.system}.default
     inputs.antigravity.packages.${pkgs.system}.default
+
+    # Google Drive Helpers
+    kdePackages.kio-gdrive # Native Dolphin Support
+    (pkgs.writeShellScriptBin "setup-gdrive" ''
+      echo "Setting up Google Drive..."
+      if ${pkgs.rclone}/bin/rclone listremotes | grep -q "^gdrive:"; then
+        echo "Remote 'gdrive' already exists."
+      else
+        echo "Launching browser for authentication..."
+        ${pkgs.rclone}/bin/rclone config create gdrive drive 
+      fi
+      
+      echo "Enabling mount service..."
+      mkdir -p ~/GoogleDrive
+      systemctl --user daemon-reload
+      systemctl --user restart rclone-gdrive-mount
+      
+      echo "Done! Drive should be mounted at ~/GoogleDrive"
+    '')
   ];
 
   # Hyprland User Config
