@@ -94,6 +94,13 @@
       monitor = [
         ",preferred,auto,1"
       ];
+
+      env = [
+        "HYPRCURSOR_THEME,${config.stylix.cursor.name}"
+        "HYPRCURSOR_SIZE,${toString config.stylix.cursor.size}"
+        "XCURSOR_THEME,${config.stylix.cursor.name}"
+        "XCURSOR_SIZE,${toString config.stylix.cursor.size}"
+      ];
       
       # General settings for animations and behavior
       general = {
