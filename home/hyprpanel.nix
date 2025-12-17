@@ -48,11 +48,16 @@
         shortcuts.enabled = false;
       };
       
-      # Power menu configuration
+      # Power menu configuration - hide avatar
       menus.power = {
         lowBatteryNotification = true;
         lowBatteryThreshold = 20;
+        avatar.image = "󱄅";  # Use Nix logo instead of user avatar
       };
+      
+      # Dashboard avatar/profile settings
+      menus.dashboard.powermenu.avatar.image = "󱄅";  # Nix logo
+      menus.dashboard.powermenu.avatar.name = "";
       
       # Bluetooth module settings
       bar.bluetooth = {
