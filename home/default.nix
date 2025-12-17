@@ -36,14 +36,14 @@
     # Additional GUI applications for ricing
     kitty # Terminal emulator (better than default)
     kdePackages.dolphin # File manager
-    wofi # Application launcher
+
     grim # Screenshot tool
     slurp # Screen selection tool
     wl-clipboard # Wayland clipboard utilities
     pavucontrol # PulseAudio volume control
     brightnessctl # Brightness control
     networkmanagerapplet # Network manager applet
-    wlogout # Logout menu
+
         
     # Additional CLI tools
     neofetch # System info
@@ -82,6 +82,34 @@
       systemctl --user restart rclone-gdrive-mount
       
       echo "Done! Drive should be mounted at ~/GoogleDrive"
+    '')
+
+    # Power Menu Script
+    # Power Menu Script
+    (pkgs.writeShellScriptBin "power-menu" ''
+      entries=" Rebuild\n Lock\n Suspend\n Reboot\n Shutdown\n Logout"
+      selected=$(echo -e "$entries" | wofi --width 250 --height 270 --dmenu --cache-file /dev/null | awk '{print tolower($2)}')
+
+      case $selected in
+        rebuild)
+          kitty --title "NixOS Rebuild" --hold -e sudo nixos-rebuild switch --flake /home/falconnor4/github/nixos
+          ;;
+        lock)
+          pidof hyprlock || hyprlock
+          ;;
+        suspend)
+          systemctl suspend
+          ;;
+        reboot)
+          systemctl reboot
+          ;;
+        shutdown)
+          systemctl poweroff
+          ;;
+        logout)
+          hyprctl dispatch exit
+          ;;
+      esac
     '')
   ];
 
@@ -226,7 +254,7 @@
         "custom/power" = {
           format = "⏻";
           tooltip = false;
-          on-click = "wlogout";
+          on-click = "power-menu";
         };
         
         "hyprland/workspaces" = {
@@ -385,6 +413,8 @@
 
     '';
   };
+
+  programs.wofi.enable = true;
 
   services.dunst.enable = true;
 
