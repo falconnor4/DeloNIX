@@ -72,6 +72,16 @@
   hardware.bluetooth.powerOnBoot = true;
   services.blueman.enable = true;
 
+  # UPower for battery monitoring (required by Hyprpanel)
+  services.upower.enable = true;
+
+  # Qt theming for KDE apps like Dolphin (override Stylix defaults)
+  qt = {
+    enable = true;
+    platformTheme = lib.mkForce "qt5ct";
+    style = lib.mkForce "breeze";
+  };
+
   # Hyprland
   # Hyprland
   programs.hyprland.enable = true;
@@ -128,6 +138,12 @@
     kdePackages.polkit-kde-agent-1 # Polkit authentication agent
     seahorse # GUI for gnome-keyring
     xdg-utils # For opening URLs
+    
+    # Qt theming for Dolphin
+    libsForQt5.qt5ct
+    kdePackages.qt6ct
+    kdePackages.breeze
+    kdePackages.breeze-icons
   ];
 
   # Stylix
@@ -135,6 +151,7 @@
   stylix.autoEnable = true;
   stylix.targets.gtk.enable = true;
   stylix.targets.gnome.enable = true;
+  stylix.targets.qt.enable = true;
 
 
   stylix.image = ../../wallpaper.png;

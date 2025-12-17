@@ -138,9 +138,8 @@
       ];
       
       exec-once = [
-        "ashell"
+        "hyprpanel"
         "hypridle"
-        "nm-applet --indicator"
         "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
         "systemctl --user start hyprpolkitagent"
         "${pkgs.kdePackages.polkit-kde-agent-1}/libexec/polkit-kde-authentication-agent-1"

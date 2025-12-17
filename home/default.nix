@@ -4,7 +4,7 @@
   imports = [
     ./packages.nix
     ./hyprland.nix
-    ./ashell.nix
+    ./hyprpanel.nix
     ./programs.nix
     ./services.nix
   ];
