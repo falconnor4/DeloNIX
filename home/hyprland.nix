@@ -18,6 +18,11 @@
         "XCURSOR_SIZE,${toString config.stylix.cursor.size}"
       ];
       
+      # Input configuration
+      input = {
+        sensitivity = 0.5; # -1.0 - 1.0, 0 means no modification.
+      };
+
       # General settings for animations and behavior
       general = {
         gaps_in = 0;
