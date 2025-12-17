@@ -21,6 +21,10 @@
       # Input configuration
       input = {
         sensitivity = 0.5; # -1.0 - 1.0, 0 means no modification.
+        natural_scroll = false;
+        touchpad = {
+          natural_scroll = false;
+        };
       };
 
       # General settings for animations and behavior
