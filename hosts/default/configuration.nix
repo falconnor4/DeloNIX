@@ -113,6 +113,9 @@
     dedicatedServer.openFirewall = true;
   };
 
+  # Docker
+  virtualisation.docker.enable = true;
+
   # Nix-LD
   programs.nix-ld.enable = true;
   programs.nix-ld.libraries = with pkgs; [
