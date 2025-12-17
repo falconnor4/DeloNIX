@@ -20,10 +20,10 @@
       
       # Input configuration
       input = {
-        sensitivity = 0.5; # -1.0 - 1.0, 0 means no modification.
-        natural_scroll = false;
+        sensitivity = 0.3; # -1.0 - 1.0, 0 means no modification.
+        natural_scroll = true;
         touchpad = {
-          natural_scroll = false;
+          natural_scroll = true;
         };
       };
 
