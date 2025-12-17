@@ -67,6 +67,11 @@
   security.polkit.enable = true;
   services.gnome.gnome-keyring.enable = true;
 
+  # Bluetooth
+  hardware.bluetooth.enable = true;
+  hardware.bluetooth.powerOnBoot = true;
+  services.blueman.enable = true;
+
   # Hyprland
   # Hyprland
   programs.hyprland.enable = true;
