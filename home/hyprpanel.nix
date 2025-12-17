@@ -58,29 +58,27 @@
         label = true;
       };
       
-      # Theme settings - Bubbly look
+      # Theme settings - Sleek sharp look
       theme = {
         bar = {
-          transparent = true;
-          floating = true;
+          transparent = false;
+          floating = false;
           
-          # Button styling for bubbly appearance
+          # Button styling for clean appearance
           buttons = {
-            enableBorders = true;
-            radius = lib.mkForce "12px";
-            padding_x = lib.mkForce "4px";
-            padding_y = lib.mkForce "2px";
+            enableBorders = false;
+            radius = lib.mkForce "0px";
+            padding_x = lib.mkForce "8px";
+            padding_y = lib.mkForce "4px";
             spacing = lib.mkForce "0em";
-            background = lib.mkForce "rgba(30, 30, 46, 0.85)";
-            borderColor = lib.mkForce "rgba(137, 180, 250, 0.4)";
           };
           
-          # Floating bar margins - flush layout
+          # Solid bar - no margins
           margin_top = lib.mkForce "0px";
           margin_sides = lib.mkForce "0px";
           margin_bottom = lib.mkForce "0px";
           
-          # Bar outer styling - minimal spacing
+          # Bar outer styling - sharp corners
           outer_spacing = lib.mkForce "0px";
           border_radius = lib.mkForce "0px";
         };
@@ -90,19 +88,19 @@
           size = lib.mkForce "13px";
         };
         
-        # Notification styling to match
+        # Notification styling - sharp
         notification = {
-          border_radius = lib.mkForce "16px";
+          border_radius = lib.mkForce "0px";
         };
         
-        # Menu styling to match
+        # Menu styling - sharp
         menu = {
-          border_radius = lib.mkForce "16px";
+          border_radius = lib.mkForce "0px";
         };
         
-        # OSD styling
+        # OSD styling - sharp
         osd = {
-          border_radius = lib.mkForce "16px";
+          border_radius = lib.mkForce "0px";
         };
       };
       
@@ -144,16 +142,18 @@
     };
     style = ''
       window {
-        border-radius: 12px;
+        border-radius: 0px;
         background-color: rgba(30, 30, 46, 0.95);
+        border: 1px solid rgba(137, 180, 250, 0.5);
       }
       
       #input {
-        border-radius: 8px;
+        border-radius: 0px;
         padding: 10px;
         margin: 10px;
         background-color: rgba(49, 50, 68, 0.9);
         color: #cdd6f4;
+        border: 1px solid rgba(137, 180, 250, 0.3);
       }
       
       #outer-box {
@@ -162,7 +162,7 @@
       
       #entry {
         padding: 10px;
-        border-radius: 8px;
+        border-radius: 0px;
       }
       
       #entry:selected {

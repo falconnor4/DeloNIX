@@ -19,23 +19,21 @@
       
       # General settings for animations and behavior
       general = {
-        gaps_in = 5;
-        gaps_out = 10;
-        border_size = 2;
+        gaps_in = 0;
+        gaps_out = 0;
+        border_size = 1;
         layout = "dwindle";
       };
       
       decoration = {
-        rounding = 10;
+        rounding = 0;
         blur = {
           enabled = true;
           size = 3;
           passes = 1;
         };
         shadow = {
-          enabled = true;
-          range = 4;
-          render_power = 3;
+          enabled = false;
         };
       };
       
