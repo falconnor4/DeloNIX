@@ -150,6 +150,7 @@
       ];
     gesture = [
         "3, horizontal, workspace"
+        "3, up, dispatcher, hyprexpo:expo, toggle"
       ];
 
 
@@ -232,8 +233,5 @@
 
 
 
-  home.packages = [ pkgs.libinput-gestures ];
-  xdg.configFile."libinput-gestures.conf".text = ''
-    gesture swipe up 3 hyprctl dispatch hyprexpo:expo toggle
-  '';
+
 }
