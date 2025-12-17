@@ -19,8 +19,7 @@
       
       # Bar settings
       bar = {
-        launcher.autoDetectIcon = false;
-        launcher.icon = "󱄅";  # Nix logo (nf-md-nix)
+        launcher.autoDetectIcon = true;
         workspaces = {
           show_icons = true;
           show_numbered = true;
@@ -48,16 +47,11 @@
         shortcuts.enabled = false;
       };
       
-      # Power menu configuration - hide avatar
+      # Power menu configuration
       menus.power = {
         lowBatteryNotification = true;
         lowBatteryThreshold = 20;
-        avatar.image = "󱄅";  # Use Nix logo instead of user avatar
       };
-      
-      # Dashboard avatar/profile settings
-      menus.dashboard.powermenu.avatar.image = "󱄅";  # Nix logo
-      menus.dashboard.powermenu.avatar.name = "";
       
       # Bluetooth module settings
       bar.bluetooth = {
