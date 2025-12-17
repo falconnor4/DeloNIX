@@ -67,9 +67,14 @@
   security.polkit.enable = true;
   services.gnome.gnome-keyring.enable = true;
 
-  # Bluetooth
+  # Bluetooth - Ensure full Bluetooth stack for Hyprpanel
   hardware.bluetooth.enable = true;
   hardware.bluetooth.powerOnBoot = true;
+  hardware.bluetooth.settings = {
+    General = {
+      Enable = "Source,Sink,Media,Socket";
+    };
+  };
   services.blueman.enable = true;
 
   # UPower for battery monitoring (required by Hyprpanel)

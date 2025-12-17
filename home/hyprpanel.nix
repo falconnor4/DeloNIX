@@ -53,16 +53,56 @@
         lowBatteryThreshold = 20;
       };
       
-      # Theme settings
+      # Bluetooth module settings
+      bar.bluetooth = {
+        label = true;
+      };
+      
+      # Theme settings - Bubbly look
       theme = {
         bar = {
           transparent = true;
-          buttons.enableBorders = false;
-          floating = false;
+          floating = true;
+          
+          # Button styling for bubbly appearance
+          buttons = {
+            enableBorders = true;
+            radius = lib.mkForce "12px";
+            padding_x = lib.mkForce "4px";
+            padding_y = lib.mkForce "2px";
+            spacing = lib.mkForce "0em";
+            background = lib.mkForce "rgba(30, 30, 46, 0.85)";
+            borderColor = lib.mkForce "rgba(137, 180, 250, 0.4)";
+          };
+          
+          # Floating bar margins - flush layout
+          margin_top = lib.mkForce "0px";
+          margin_sides = lib.mkForce "0px";
+          margin_bottom = lib.mkForce "0px";
+          
+          # Bar outer styling - minimal spacing
+          outer_spacing = lib.mkForce "0px";
+          border_radius = lib.mkForce "0px";
         };
+        
         font = {
-          name = "CaskaydiaCove NF";
-          size = "14px";
+          name = lib.mkForce "CaskaydiaCove NF";
+          size = lib.mkForce "13px";
+        };
+        
+        # Notification styling to match
+        notification = {
+          border_radius = lib.mkForce "16px";
+        };
+        
+        # Menu styling to match
+        menu = {
+          border_radius = lib.mkForce "16px";
+        };
+        
+        # OSD styling
+        osd = {
+          border_radius = lib.mkForce "16px";
         };
       };
       

@@ -60,6 +60,7 @@
       modules = [
         ./hosts/default/configuration.nix
         ./hosts/default/hardware-configuration.nix
+        inputs.nixos-hardware.nixosModules.framework-13-7040-amd  # Framework 13 AMD hardware support
         inputs.lanzaboote.nixosModules.lanzaboote
         inputs.stylix.nixosModules.stylix
         inputs.home-manager.nixosModules.home-manager
