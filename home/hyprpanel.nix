@@ -19,7 +19,8 @@
       
       # Bar settings
       bar = {
-        launcher.autoDetectIcon = true;
+        launcher.autoDetectIcon = false;
+        launcher.icon = "󱄅";  # Nix logo (nf-md-nix)
         workspaces = {
           show_icons = true;
           show_numbered = true;
@@ -39,12 +40,12 @@
         };
       };
       
-      # Dashboard settings
+      # Dashboard settings - Utility focused (no app shortcuts)
       menus.dashboard = {
-        directories.enabled = true;
+        directories.enabled = false;
         stats.enable_gpu = false;
         powermenu.enabled = true;
-        shortcuts.enabled = true;
+        shortcuts.enabled = false;
       };
       
       # Power menu configuration
