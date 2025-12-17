@@ -18,7 +18,11 @@
 
     stylix.url = "github:danth/stylix";
 
-    # hyprland.url = "github:hyprwm/Hyprland";
+    hyprland.url = "github:hyprwm/Hyprland";
+    hyprland-plugins = {
+      url = "github:hyprwm/hyprland-plugins";
+      inputs.hyprland.follows = "hyprland";
+    };
 
     nixvim = {
       url = "github:nix-community/nixvim";
@@ -71,6 +75,14 @@
           home-manager.sharedModules = [ inputs.nixvim.homeManagerModules.nixvim ];
           home-manager.users.falconnor4 = import ./home/default.nix;
           home-manager.backupFileExtension = "backup";
+        }
+        {
+          nixpkgs.overlays = [
+            (final: prev: {
+              hyprland = inputs.hyprland.packages.${prev.system}.hyprland;
+              hyprlandPlugins = inputs.hyprland-plugins.packages.${prev.system};
+            })
+          ];
         }
       ];
     };

@@ -3,6 +3,7 @@
 {
   wayland.windowManager.hyprland = {
     enable = true;
+    # package = inputs.hyprland.packages.${pkgs.system}.hyprland;
     settings = {
       # Basic Hyprland configuration
       "$mod" = "SUPER";
@@ -24,6 +25,8 @@
         border_size = 1;
         layout = "dwindle";
       };
+
+
       
       decoration = {
         rounding = 0;
@@ -102,6 +105,9 @@
         ", Print, exec, grim -g \"$(slurp)\" - | wl-copy"
         "$mod, Print, exec, grim - | wl-copy"
         "SHIFT, Print, exec, grim -g \"$(slurp)\" ~/Pictures/screenshot-$(date +%Y%m%d-%H%M%S).png"
+        
+        # Hyprexpo
+        "SUPER, grave, hyprexpo:expo, toggle"
       ];
       
       # Function key bindings (volume, brightness, media)
@@ -140,12 +146,31 @@
         "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
         "systemctl --user start hyprpolkitagent"
         "${pkgs.kdePackages.polkit-kde-agent-1}/libexec/polkit-kde-authentication-agent-1"
-        
-        # Enforce gestures settings at runtime
-        "hyprctl keyword gestures:workspace_swipe 1"
-        "hyprctl keyword gestures:workspace_swipe_fingers 3"
+        "libinput-gestures-setup start"
       ];
+    gesture = [
+        "3, horizontal, workspace"
+      ];
+
+
     };
+    
+    plugins = [
+      pkgs.hyprlandPlugins.hyprexpo
+    ];
+    
+    extraConfig = ''
+      plugin {
+        hyprexpo {
+          columns = 3
+          gap_size = 5
+          bg_col = rgb(111111)
+          workspace_method = center current # [center/first] [workspace] e.g. first 1 or center m+1
+
+          enable_alt_release_exit = true # alt swiping only triggers on release of alt
+        }
+      }
+    '';
   };
 
   # Hyprlock
@@ -204,4 +229,11 @@
       ];
     };
   };
+
+
+
+  home.packages = [ pkgs.libinput-gestures ];
+  xdg.configFile."libinput-gestures.conf".text = ''
+    gesture swipe up 3 hyprctl dispatch hyprexpo:expo toggle
+  '';
 }

@@ -40,7 +40,7 @@
   users.users.falconnor4 = {
     isNormalUser = true;
     description = "Connor";
-    extraGroups = [ "networkmanager" "wheel" "docker" ];
+    extraGroups = [ "networkmanager" "wheel" "docker" "input" ];
     packages = with pkgs; [];
   };
 
@@ -48,7 +48,11 @@
   nixpkgs.config.allowUnfree = true;
 
   # Nix Configuration
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings = {
+    experimental-features = [ "nix-command" "flakes" ];
+    substituters = ["https://hyprland.cachix.org"];
+    trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
+  };
 
   # Create a custom session file for Hyprland so SDDM can find it
   # Note: Hyprland usually installs a session file, checking if it's needed explicitly
@@ -90,7 +94,7 @@
   # Hyprland
   # Hyprland
   programs.hyprland.enable = true;
-  # programs.hyprland.package = inputs.hyprland.packages.${pkgs.system}.hyprland; # Use stock nixpkgs version for stability
+  # programs.hyprland.package = inputs.hyprland.packages.${pkgs.system}.hyprland;
   # programs.hyprland.package = inputs.hyprland.packages.${pkgs.system}.hyprland; # Use stock nixpkgs version for stability
   
   # XDG Portals
