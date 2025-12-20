@@ -156,6 +156,13 @@
     kdePackages.qt6ct
     kdePackages.breeze
     kdePackages.breeze-icons
+    
+    # Rust development
+    rustc
+    cargo
+    rustfmt
+    clippy
+    rust-analyzer
   ];
 
   # Stylix
