@@ -163,6 +163,7 @@
     rustfmt
     clippy
     rust-analyzer
+    qemu
   ];
 
   # Stylix
