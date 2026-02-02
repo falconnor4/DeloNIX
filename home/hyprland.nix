@@ -63,7 +63,7 @@
       };
       
       bind = [
-        "$mod, Q, exec, kitty"
+        "$mod, Q, exec, kitty tmux new-session -A -s default"
         "$mod, C, killactive,"
         "$mod, M, exit,"
         "$mod, E, exec, dolphin"

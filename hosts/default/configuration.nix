@@ -54,6 +54,13 @@
     trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
   };
 
+  # Automatic Garbage Collection
+  nix.gc = {
+    automatic = true;
+    dates = "weekly";
+    options = "--delete-older-than 7d";
+  };
+
   # Create a custom session file for Hyprland so SDDM can find it
   # Note: Hyprland usually installs a session file, checking if it's needed explicitly
   services.xserver.enable = true;
@@ -164,6 +171,8 @@
     clippy
     rust-analyzer
     qemu
+    xournalpp
+    llama-cpp
   ];
 
   # Stylix

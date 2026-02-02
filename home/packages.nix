@@ -4,7 +4,6 @@
   home.packages = with pkgs; [
     tmux
     devenv
-    gemini-cli
 
     # Custom fztea package
     (buildGoModule rec {
@@ -58,6 +57,7 @@
     gh          # GitHub CLI
     inputs.zen-browser.packages.${pkgs.system}.default
     inputs.antigravity.packages.${pkgs.system}.default
+    inputs.opencode.packages.${pkgs.system}.default
     
     # Google Drive
     kdePackages.kio-gdrive  # Native Dolphin Support
