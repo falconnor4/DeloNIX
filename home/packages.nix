@@ -103,6 +103,8 @@
           hyprctl dispatch exit
           ;;
       esac
+    '')
+    
     (pkgs.writeShellScriptBin "start-local-ai" ''
       MODEL_DIR="$HOME/.cache/opencode/models"
       MODEL_FILE="$MODEL_DIR/huihui.gguf"
