@@ -57,7 +57,6 @@
     gh          # GitHub CLI
     inputs.zen-browser.packages.${pkgs.system}.default
     inputs.antigravity.packages.${pkgs.system}.default
-    inputs.opencode.packages.${pkgs.system}.default
     
     # Google Drive
     kdePackages.kio-gdrive  # Native Dolphin Support
@@ -103,22 +102,6 @@
           hyprctl dispatch exit
           ;;
       esac
-    '')
-    
-    (pkgs.writeShellScriptBin "start-local-ai" ''
-      MODEL_DIR="$HOME/.cache/opencode/models"
-      MODEL_FILE="$MODEL_DIR/huihui.gguf"
-      MODEL_URL="https://huggingface.co/mradermacher/Huihui-LFM2.5-1.2B-Thinking-abliterated-i1-GGUF/resolve/main/Huihui-LFM2.5-1.2B-Thinking-abliterated.i1-Q4_K_M.gguf"
-
-      mkdir -p "$MODEL_DIR"
-
-      if [ ! -f "$MODEL_FILE" ]; then
-        echo "Downloading model..."
-        ${pkgs.wget}/bin/wget -O "$MODEL_FILE" "$MODEL_URL"
-      fi
-
-      echo "Starting local AI server..."
-      ${pkgs.llama-cpp}/bin/llama-server -m "$MODEL_FILE" --port 8080 --host 127.0.0.1 -c 4096 -ngl 99
     '')
   ];
 }

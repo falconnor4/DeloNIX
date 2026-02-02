@@ -172,7 +172,6 @@
     rust-analyzer
     qemu
     xournalpp
-    llama-cpp
   ];
 
   # Stylix

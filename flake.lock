@@ -1040,7 +1040,7 @@
         "type": "github"
       }
     },
-    "opencode": {
+    "opencode-flake": {
       "inputs": {
         "nixpkgs": [
           "nixpkgs"
@@ -1049,13 +1049,13 @@
       "locked": {
         "lastModified": 1766754166,
         "narHash": "sha256-anLh9N8KLqssOMd+xooagd/kLhoU4BChMfEToWmntCg=",
-        "owner": "AodhanHayter",
+        "owner": "aodhanhayter",
         "repo": "opencode-flake",
         "rev": "57574d4c2d550b24487cb810e2cfcb7c259b0357",
         "type": "github"
       },
       "original": {
-        "owner": "AodhanHayter",
+        "owner": "aodhanhayter",
         "repo": "opencode-flake",
         "type": "github"
       }
@@ -1120,7 +1120,7 @@
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs_3",
         "nixvim": "nixvim",
-        "opencode": "opencode",
+        "opencode-flake": "opencode-flake",
         "stylix": "stylix",
         "zen-browser": "zen-browser"
       }
