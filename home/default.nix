@@ -7,6 +7,7 @@
     ./hyprpanel.nix
     ./programs.nix
     ./services.nix
+    ./local-ai.nix
   ];
 
   # Home Manager
