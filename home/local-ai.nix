@@ -10,6 +10,16 @@ in
   home.packages = with pkgs; [
     opencode
     llama-cpp
+    
+    (pkgs.writeShellScriptBin "llama-start" ''
+      systemctl --user start llama-server
+      echo "Llama Server started on http://127.0.0.1:8080"
+    '')
+    
+    (pkgs.writeShellScriptBin "llama-stop" ''
+      systemctl --user stop llama-server
+      echo "Llama Server stopped"
+    '')
   ];
 
   systemd.user.services.llama-server = {
@@ -22,7 +32,7 @@ in
       Restart = "always";
     };
     Install = {
-      WantedBy = [ "default.target" ];
+      WantedBy = lib.mkForce []; # Disable auto-start
     };
   };
 

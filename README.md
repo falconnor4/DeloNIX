@@ -57,13 +57,24 @@ To enable the automatic Google Drive mount:
 3.  Follow the authentication prompts.
 4.  The systemd service `rclone-gdrive-mount` will automatically mount it to `~/GoogleDrive` on login.
 
-### 3. Fix Package Hashes
+### 3. Local AI (Opencode & Llama)
+This config includes **Opencode** and a local **Llama 2.5** model configuration.
+
+-   **Llama Server**:
+    -   To enable the AI backend, run: `llama-start`
+    -   To stop it and free RAM, run: `llama-stop`
+    -   The server runs at `http://127.0.0.1:8080`.
+-   **Opencode**:
+    -   Run `opencode` in your terminal.
+    -   The configuration is auto-generated at `~/.config/opencode/config.json`.
+
+### 4. Fix Package Hashes
 Some custom packages (like `fztea`) use placeholder hashes.
 -   Try to build the config.
 -   If it fails with a hash mismatch, copy the *actual* hash provided by Nix.
 -   Update the `sha256` or `vendorHash` in `home/default.nix`.
 
-### 4. Installation
+### 5. Installation
 Apply the configuration:
 
 ```bash
